@@ -1,0 +1,17 @@
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.csprojAssemblyReference.cache
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.Properties.Resources.resources
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.csproj.GenerateResource.cache
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.csproj.CoreCompileInputs.cache
+D:\Studia\Projekty\CryptoMoon\bin\Debug\CryptoMoon.exe.config
+D:\Studia\Projekty\CryptoMoon\bin\Debug\CryptoMoon.exe
+D:\Studia\Projekty\CryptoMoon\bin\Debug\CryptoMoon.pdb
+D:\Studia\Projekty\CryptoMoon\bin\Debug\EntityFramework.dll
+D:\Studia\Projekty\CryptoMoon\bin\Debug\EntityFramework.SqlServer.dll
+D:\Studia\Projekty\CryptoMoon\bin\Debug\EntityFramework.xml
+D:\Studia\Projekty\CryptoMoon\bin\Debug\EntityFramework.SqlServer.xml
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.csproj.CopyComplete
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.exe
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.pdb
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.RateForm.resources
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.Migrations.CurrencyTable.resources
+D:\Studia\Projekty\CryptoMoon\obj\Debug\CryptoMoon.Migrations.FirstGiantStepForHumanityWhichMeansAddingRelation.resources
