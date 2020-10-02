@@ -23,7 +23,7 @@ namespace CryptoMoon
             
             currencyComboBox.Items.AddRange(CurrencyConverterService.GetCurrencyTags());
             currencyComboBox.Text = currencyComboBox.Items[0].ToString();
-            var es = new EuroService(currencyComboBox.Text,float.Parse(amountTextBox.Text));
+            var es = new EuroService();
             currencyDataGriedView.DataSource = es.CurrencyRates;
             amountTextBox.GotFocus += (a, eve) => panelService.RemoveText(amountTextBox);
             amountTextBox.LostFocus += (a, eve) => panelService.AddText(amountTextBox, "1");
@@ -31,6 +31,11 @@ namespace CryptoMoon
         }
 
         private void differenceButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
         {
 
         }

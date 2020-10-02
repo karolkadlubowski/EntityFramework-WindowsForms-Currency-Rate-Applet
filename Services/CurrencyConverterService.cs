@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CryptoMoon.Data;
+using CryptoMoon.Models;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace CryptoMoon.Services
@@ -9,6 +12,11 @@ namespace CryptoMoon.Services
         /// <summary>
         /// Gets all available currency tags
         /// </summary>
+        /// 
+        private readonly IDatabase database = new Database();
+
+        public List<CurrencyRate> CurrencyRates { get; set; } = new List<CurrencyRate>();
+
         public static string[] GetCurrencyTags()
         {
 
@@ -31,8 +39,8 @@ namespace CryptoMoon.Services
         {
             if (currency.ToLower() == "")
                 throw new ArgumentException("Invalid Argument! currency parameter cannot be empty!");
-            if (currency.ToLower() == "euro")
-                throw new ArgumentException("Invalid Argument! Cannot get exchange rate from EURO to EURO");
+            if (currency.ToLower() == "eur")
+                return 1;
 
             try
             {
@@ -120,6 +128,8 @@ namespace CryptoMoon.Services
             }
             catch { return 0; }
         }
+
+        
     }
 }
 

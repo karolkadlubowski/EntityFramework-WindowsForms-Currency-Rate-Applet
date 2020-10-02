@@ -80,6 +80,7 @@
             this.refreshButton.TabIndex = 4;
             this.refreshButton.Text = "Odśwież";
             this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // RateForm
             // 

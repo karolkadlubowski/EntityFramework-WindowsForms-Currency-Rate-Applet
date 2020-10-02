@@ -1,4 +1,4 @@
-# EntityFramework-Windows-Forms-Currency-Rate-Applet
+# EntityFramework-WindowsForms-Currency-Rate-Applet
 An applet to storage data of currency rates.
 
 You should launch the program from Visual Studio.
