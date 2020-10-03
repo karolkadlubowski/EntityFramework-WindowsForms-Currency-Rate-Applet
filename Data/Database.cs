@@ -24,9 +24,6 @@ namespace CryptoMoon.Data
         {
             get => dateRateCurrencyRepository ?? new Repository<DateRateCurrency>(context);
         }
-
-        int a;
-
         public async Task<bool> Complete()
             => await context.SaveChangesAsync() > 0;
 

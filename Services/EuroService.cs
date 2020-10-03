@@ -16,7 +16,13 @@ namespace CryptoMoon.Services
 
         public DateRateCurrency DateRateCurrency { get; set; } = new DateRateCurrency();
 
-        public List<CurrencyRate> CurrencyRates { get; set; } = new List<CurrencyRate>();
+        public List<CurrencyRate> EuroCurrencyRates { get; set; } = new List<CurrencyRate>();
+
+        public List<CurrencyRate> DataGriedCurrentCurrencyRates { get; set; } = new List<CurrencyRate>();
+
+        public int CurrentDataGriedCurrencyIndex { get; set; }
+
+        public float CurrentDataGriedAmount { get; set; }
 
         public EuroService()
         {
@@ -32,7 +38,7 @@ namespace CryptoMoon.Services
             if (dateRateCurrencies.Any())
             {
                 foreach (DateRateCurrency dateRateCurrency in dateRateCurrencies)
-                    CurrencyRates.Add(new CurrencyRate(dateRateCurrency.Currency.Name, dateRateCurrency.Rate));
+                    EuroCurrencyRates.Add(new CurrencyRate(dateRateCurrency.Currency.Name, dateRateCurrency.Rate));
             }
             else
             {
@@ -45,7 +51,7 @@ namespace CryptoMoon.Services
                 {
                     currencyName = currencies[i];
                     rate = CSS.GetExchangeRate("eur", currencyName);
-                    CurrencyRates.Add(new CurrencyRate(currencyName, rate));
+                    EuroCurrencyRates.Add(new CurrencyRate(currencyName, rate));
                     dateRateCurrencies.Add(new DateRateCurrency(DateTime.Today, rate, i + 1));
                 }
                 database.DateRateCurrencyRepository.AddRange(dateRateCurrencies);
@@ -56,22 +62,22 @@ namespace CryptoMoon.Services
         }
 
         private float calculateRate(string currency)
-        => CurrencyRates.Find(cr => cr.Name == currency).Rate;
+        => EuroCurrencyRates.Find(cr => cr.Name == currency).Rate;
 
         public float GetExchangeRateFromDatabase(string from, string to, float amount = 1)
         {
-            if (from == null || to == null)
+            if (to == null)
                 return 0;
 
             // Convert Euro to Euro
-            if (from.ToLower() == "eur" && to.ToLower() == "eur")
+            if (from.ToLower() == to.ToLower() )
                 return amount;
             
             try
             {
                 // First Get the exchange rate of both currencies in euro
-                float fromRate= CurrencyRates.Find(cr => cr.Name == from).Rate;
-                float toRate=CurrencyRates.Find(cr => cr.Name == to).Rate;
+                float fromRate= EuroCurrencyRates.Find(cr => cr.Name == from).Rate;
+                float toRate=EuroCurrencyRates.Find(cr => cr.Name == to).Rate;
 
                 // Convert Between Euro to Other Currency
                 if (from.ToLower() == "eur")
@@ -94,7 +100,18 @@ namespace CryptoMoon.Services
         public List<CurrencyRate> GetCurrencyRates(string fromCurrency, float amount)
         {
             List<CurrencyRate> currencyRates = new List<CurrencyRate>();
-            //foreach
+            float fromRate = EuroCurrencyRates.Find(cr => cr.Name == fromCurrency).Rate;
+            if (fromRate == 0)
+                return null;
+
+            string toCurrency;
+            float toRate;
+            for(int i=0;i<33;i++)
+            {
+                toCurrency = EuroCurrencyRates[i].Name;
+                toRate= EuroCurrencyRates.Find(cr => cr.Name == toCurrency).Rate;                
+                currencyRates.Add(new CurrencyRate(toCurrency, toRate/fromRate*amount));
+            }
             return currencyRates;
         }
 

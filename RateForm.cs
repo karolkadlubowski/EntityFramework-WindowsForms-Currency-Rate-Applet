@@ -16,18 +16,28 @@ namespace CryptoMoon
         private PanelService panelService { get; set; } = new PanelService();
         private INavigationService navigationService { get; set; } = new NavigationService();
 
+        private EuroService euroService { get; set; } = new EuroService();
+
         public RateForm()
         {
             InitializeComponent();
-            //var panelService = new PanelService();
-            
             currencyComboBox.Items.AddRange(CurrencyConverterService.GetCurrencyTags());
             currencyComboBox.Text = currencyComboBox.Items[0].ToString();
-            var es = new EuroService();
-            currencyDataGriedView.DataSource = es.CurrencyRates;
+            currencyDataGriedView.DataSource = euroService.EuroCurrencyRates;
             amountTextBox.GotFocus += (a, eve) => panelService.RemoveText(amountTextBox);
             amountTextBox.LostFocus += (a, eve) => panelService.AddText(amountTextBox, "1");
-            //amountTextBox.TextChanged += (a, eve) => es.MultiplyValue(currencyDataGriedView, float.Parse(amountTextBox.Text));
+        }
+
+        public RateForm(EuroService euroService)
+        {
+            this.euroService = euroService;
+            InitializeComponent();
+            currencyComboBox.Items.AddRange(CurrencyConverterService.GetCurrencyTags());
+            currencyComboBox.Text = currencyComboBox.Items[euroService.CurrentDataGriedCurrencyIndex].ToString();
+            amountTextBox.Text = euroService.CurrentDataGriedAmount.ToString();
+            currencyDataGriedView.DataSource = euroService.DataGriedCurrentCurrencyRates;
+            amountTextBox.GotFocus += (a, eve) => panelService.RemoveText(amountTextBox);
+            amountTextBox.LostFocus += (a, eve) => panelService.AddText(amountTextBox, "1");
         }
 
         private void differenceButton_Click(object sender, EventArgs e)
@@ -37,7 +47,10 @@ namespace CryptoMoon
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-
+            euroService.CurrentDataGriedAmount = float.Parse(amountTextBox.Text);
+            euroService.CurrentDataGriedCurrencyIndex = currencyComboBox.SelectedIndex;
+            euroService.DataGriedCurrentCurrencyRates = euroService.GetCurrencyRates(currencyComboBox.Text,float.Parse(amountTextBox.Text));
+            navigationService.Navigate<RateForm, RateForm>(this, typeof(RateForm),euroService, true);
         }
     }
 }

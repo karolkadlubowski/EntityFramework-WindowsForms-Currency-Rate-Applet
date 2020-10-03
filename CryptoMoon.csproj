@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyHossaBessaState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrencyHossaBessaState.Designer.cs">
+      <DependentUpon>CurrencyHossaBessaState.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\DatabaseManager.cs" />
     <Compile Include="Data\IDatabase.cs" />
@@ -86,6 +92,9 @@
     <Compile Include="Services\EuroService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\PanelService.cs" />
+    <EmbeddedResource Include="CurrencyHossaBessaState.resx">
+      <DependentUpon>CurrencyHossaBessaState.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009261329049_CurrencyTable.resx">
       <DependentUpon>202009261329049_CurrencyTable.cs</DependentUpon>
     </EmbeddedResource>
